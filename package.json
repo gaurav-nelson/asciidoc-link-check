@@ -1,0 +1,41 @@
+{
+  "name": "asciidoc-link-check",
+  "version": "0.0.0",
+  "description": "Checks all hyperlinks in an asciidoc file if they are alive or dead.",
+  "bin": {
+    "asciidoc-link-check": "asciidoc-link-check"
+  },
+  "main": "index.js",
+  "scripts": {
+    "pretest": "jshint index.js asciidoc-link-check",
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tcort/asciidoc-link-check.git"
+  },
+  "keywords": [
+    "asciidoc",
+    "adoc",
+    "link",
+    "hyperlink",
+    "href",
+    "check",
+    "checker"
+  ],
+  "author": "Gaurav Nelson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gaurav-nelson/asciidoc-link-check/issues"
+  },
+  "homepage": "https://github.com/gaurav-nelson/asciidoc-link-check#readme",
+  "dependencies": {
+    "async": "^2.1.4",
+    "chalk": "^1.1.3",
+    "commander": "^2.9.0",
+    "link-check": "^4.0.2",
+    "asciidoc-link-extractor": "^1.0.0",
+    "request": "^2.79.0",
+    "lodash": "^4.17.4"
+  }
+}

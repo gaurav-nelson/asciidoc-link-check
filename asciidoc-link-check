@@ -1,0 +1,55 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var chalk = require('chalk');
+var fs = require('fs');
+var asciidocLinkCheck = require('./');
+var program = require('commander');
+var request = require('request');
+var url = require('url');
+var path = require('path');
+
+var statusLabels = {
+    alive: chalk.green('✓'),
+    dead: chalk.red('✖')
+};
+
+var error = false;
+var opts = {};
+var stream = process.stdin; // read from stdin unless a filename is given
+program.arguments('[filenameOrUrl]').action(function (filenameOrUrl) {
+    if (/https?:/.test(filenameOrUrl)) {
+        stream = request.get(filenameOrUrl);
+        try { // extract baseUrl from supplied URL
+            var parsed = url.parse(filenameOrUrl);
+            delete parsed.search;
+            delete parsed.hash;
+            if (parsed.pathname.lastIndexOf('/') !== -1) {
+                parsed.pathname = parsed.pathname.substr(0, parsed.pathname.lastIndexOf('/') + 1);
+            }
+            opts.baseUrl = url.format(parsed);
+        } catch (err) { /* ignore error */ }
+    } else {
+        opts.baseUrl = 'file://' + path.dirname(path.resolve(filenameOrUrl));
+        stream = fs.createReadStream(filenameOrUrl);
+    }
+}).parse(process.argv);
+
+var asciidoc = ''; // collect the asciidoc data, then process it
+stream.on('data', function (chunk) {
+    asciidoc += chunk.toString();
+}).on('end', function () {
+    asciidocLinkCheck(asciidoc, opts, function (err, results) {
+        results.forEach(function (result) {
+            if(result.status === 'dead') {
+                error = true;
+            }
+            console.log('[%s] %s', statusLabels[result.status], result.link);
+        });
+        if(error) {
+            console.error(chalk.red('\nERROR: dead links found!'));
+            process.exit(1);
+        }
+    });
+});
