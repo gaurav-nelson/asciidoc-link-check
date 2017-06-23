@@ -45,10 +45,12 @@ asciidocLinkCheck('xref:https://www.google.com[Google]', function (err, results)
 ```
 
 ### Command Line
+(Optional) Use the `-p` or `--progress` switch to view progress.
+
 #### Check links for a local file
 
 ```bash
-asciidoc-link-check README.adoc
+asciidoc-link-check README.adoc --progress
 ```
 
 #### Check links for an online file
@@ -60,5 +62,5 @@ asciidoc-link-check https://github.com/gaurav-nelson/asciidoc-link-check/blob/ma
 #### Check links from standard input
 
 ```bash
-cat *.adoc | asciidoc-link-check
+cat *.adoc | asciidoc-link-check -p
 ```
