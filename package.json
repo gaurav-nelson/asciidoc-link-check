@@ -1,7 +1,7 @@
 {
   "name": "asciidoc-link-check",
-  "version": "0.0.0",
-  "description": "Checks all hyperlinks in an asciidoc file if they are alive or dead.",
+  "version": "1.0.0",
+  "description": "Checks if all hyperlinks in an asciidoc file are alive(or dead).",
   "bin": {
     "asciidoc-link-check": "asciidoc-link-check"
   },
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/tcort/asciidoc-link-check.git"
+    "url": "git://github.com/gaurav-nelson/asciidoc-link-check.git"
   },
   "keywords": [
     "asciidoc",
