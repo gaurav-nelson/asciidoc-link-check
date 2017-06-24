@@ -5,12 +5,6 @@ var async = require('async');
 var linkCheck = require('link-check');
 var asciidocLinkExtractor = require('asciidoc-link-extractor');
 var ProgressBar = require('progress');
-var bar;
-var showProgressBar = false;
-
-if (_.includes(process.argv, "--progress") || _.includes(process.argv, "-p")) {
-    showProgressBar = true;
-}
 
 module.exports = function asciidocLinkCheck(asciidoc, opts, callback) {
     if (arguments.length === 2 && typeof opts === 'function') {
@@ -19,9 +13,10 @@ module.exports = function asciidocLinkCheck(asciidoc, opts, callback) {
         opts = {};
     }
 
-    var linksCollection = _.uniq(asciidocLinkExtractor(asciidoc))
-    if (showProgressBar) {
-        bar = bar || new ProgressBar('Checking... [:bar] :percent', {
+    var bar;
+    var linksCollection = _.uniq(asciidocLinkExtractor(asciidoc));
+    if (opts.showProgressBar) {
+        bar = new ProgressBar('Checking... [:bar] :percent', {
             complete: '=',
             incomplete: ' ',
             width: 25,
@@ -30,9 +25,11 @@ module.exports = function asciidocLinkCheck(asciidoc, opts, callback) {
     }
 
     async.mapLimit(linksCollection, 2, function (link, callback) {
-        linkCheck(link, opts, callback)
-        if (showProgressBar) {
-            bar.tick();
-        }
+        linkCheck(link, opts, function (err, result) {
+            if (opts.showProgressBar) {
+                bar.tick();
+            }
+            callback(err, result);
+        });
     }, callback);
 };
