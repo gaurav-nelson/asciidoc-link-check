@@ -1,19 +1,41 @@
 = asciidoc-link-check
 Checks if all hyperlinks in an asciidoc file are alive(or dead).
 
-(Uses most of the source code from https://github.com/tcort/markdown-link-check[markdown-link-check] module)
+(Uses the source code from https://github.com/tcort/markdown-link-check[markdown-link-check] module)
 
-== Installation
+== Local Installation
+To install the command line tool, run:
+[source, bash]
+----
+npm install -g asciidoc-link-check
+----
+
+=== Usage
+(Optional) Use the `-p` or `--progress` switch to view progress.
+
+==== Check links for a local file
+[source,bash]
+----
+asciidoc-link-check README.adoc --progress
+----
+
+==== Check links for an online file
+[source,bash]
+----
+asciidoc-link-check https://github.com/gaurav-nelson/asciidoc-link-check/blob/master/README.adoc
+----
+
+==== Check links from standard input
+[source,bash]
+----
+cat *.adoc | asciidoc-link-check -p
+----
+
+=== Using in your node project
 To add the module to your project, run:
 [source, bash]
 ----
 npm install --save asciidoc-link-check
-----
-
-To install the command line tool globally, run:
-[source, bash]
-----
-npm install -g asciidoc-link-check
 ----
 
 == API
@@ -42,25 +64,4 @@ asciidocLinkCheck('xref:https://www.google.com[Google]', function (err, results)
         console.log('%s is %s', result.link, result.status);
     });
 });
-----
-
-=== Command Line
-(Optional) Use the `-p` or `--progress` switch to view progress.
-
-==== Check links for a local file
-[source,bash]
-----
-asciidoc-link-check README.adoc --progress
-----
-
-==== Check links for an online file
-[source,bash]
-----
-asciidoc-link-check https://github.com/gaurav-nelson/asciidoc-link-check/blob/master/README.adoc
-----
-
-==== Check links from standard input
-[source,bash]
-----
-cat *.adoc | asciidoc-link-check -p
 ----
