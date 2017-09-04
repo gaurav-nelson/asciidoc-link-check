@@ -43,6 +43,9 @@ stream.on('data', function (chunk) {
     asciidoc += chunk.toString();
 }).on('end', function () {
     asciidocLinkCheck(asciidoc, opts, function (err, results) {
+        if ((results.length === 0) && !(error)) {
+            console.log(chalk.yellow('No hyperlinks found!'))
+        }
         results.forEach(function (result) {
             if(result.status === 'dead') {
                 error = true;
