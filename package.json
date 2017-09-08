@@ -1,6 +1,6 @@
 {
   "name": "asciidoc-link-check",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Checks if all hyperlinks in an asciidoc file are alive(or dead).",
   "bin": {
     "asciidoc-link-check": "asciidoc-link-check"
