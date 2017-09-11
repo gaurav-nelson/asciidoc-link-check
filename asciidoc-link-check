@@ -42,18 +42,21 @@ var asciidoc = ''; // collect the asciidoc data, then process it
 stream.on('data', function (chunk) {
     asciidoc += chunk.toString();
 }).on('end', function () {
+    if (process.argv[2]) {
+        console.log(chalk.blue('\nFILE: ' + process.argv[2]))
+    }
     asciidocLinkCheck(asciidoc, opts, function (err, results) {
         if (results.length === 0) {
-            console.log(chalk.yellow('No hyperlinks found!'))
+            console.log(chalk.yellow('No hyperlinks found!\n'))
         }
         results.forEach(function (result) {
-            if(result.status === 'dead') {
+            if (result.status === 'dead') {
                 error = true;
             }
             console.log('[%s] %s', statusLabels[result.status], result.link);
         });
-        if(error) {
-            console.error(chalk.red('\nERROR: dead links found!'));
+        if (error) {
+            console.error(chalk.red('ERROR: dead links found!\n'));
             process.exit(1);
         }
     });
