@@ -28,7 +28,21 @@ asciidoc-link-check https://github.com/gaurav-nelson/asciidoc-link-check/blob/ma
 ==== Check links from standard input
 [source,bash]
 ----
-cat *.adoc | asciidoc-link-check -p
+cat <filename>.adoc | asciidoc-link-check -p
+----
+
+==== Check links in all asciidoc files in a directory
+
+Check recursively in the current directory:
+[source,bash]
+----
+find . -name \*.adoc -exec asciidoc-link-check -p {} \;
+----
+
+Check recursively in the other directories:
+[source,bash]
+----
+find <directory> -name \*.adoc -exec asciidoc-link-check -p {} \;
 ----
 
 === Using in your node project
