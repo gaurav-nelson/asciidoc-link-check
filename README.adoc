@@ -4,7 +4,7 @@ Checks if all hyperlinks in an asciidoc file are alive(or dead).
 (Uses the source code from https://github.com/tcort/markdown-link-check[markdown-link-check] module)
 
 ++++
-<a href="https://asciinema.org/a/TsMPXxqz92aJIeYhUQTsxbpjn?autoplay=1"><img src="https://asciinema.org/a/TsMPXxqz92aJIeYhUQTsxbpjn.png" width="600"/></a>
+<a href="https://asciinema.org/a/TsMPXxqz92aJIeYhUQTsxbpjn?autoplay=1"><img src="https://raw.githubusercontent.com/gaurav-nelson/asciidoc-link-check/master/scr-rec.gif"/></a>
 ++++
 
 == Local Installation
