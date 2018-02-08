@@ -3,6 +3,10 @@ Checks if all hyperlinks in an asciidoc file are alive(or dead).
 
 (Uses the source code from https://github.com/tcort/markdown-link-check[markdown-link-check] module)
 
+++++
+<a href="https://asciinema.org/a/TsMPXxqz92aJIeYhUQTsxbpjn?autoplay=1"><img src="https://asciinema.org/a/TsMPXxqz92aJIeYhUQTsxbpjn.png" width="600"/></a>
+++++
+
 == Local Installation
 To install the command line tool, run:
 [source, bash]
