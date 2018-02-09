@@ -37,6 +37,7 @@
     "link-check": "^4.3.3",
     "lodash": "^4.17.5",
     "progress": "^2.0.0",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "uuid": "^3.2.1"
   }
 }

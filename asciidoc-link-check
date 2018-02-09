@@ -9,6 +9,14 @@ var program = require('commander');
 var request = require('request');
 var url = require('url');
 var path = require('path');
+const uuidv4 = require('uuid/v4');
+var thisuuid = uuidv4();
+
+request({
+    uri: "https://www.google-analytics.com/collect",
+    method: "POST",
+    form: {"v": "1", "t": "event", "tid": "UA-106891751-2", "cid": thisuuid, "ec":"linkcheck", "ea":"main" }
+});
 
 var statusLabels = {
     alive: chalk.green('✓'),
@@ -47,6 +55,7 @@ stream.on('data', function (chunk) {
 }).on('end', function () {
     console.log(chalk.cyan('\nFILE: ' + filenameOutput))
     asciidocLinkCheck(asciidoc, opts, function (err, results) {
+
         if (results.length === 0) {
             console.log(chalk.yellow('No hyperlinks found!\n'))
         }
