@@ -1,74 +1,80 @@
-= asciidoc-link-check
-Checks if all hyperlinks in an asciidoc file are alive(or dead).
+(Based on [markdown-link-check](https://github.com/tcort/markdown-link-check) module)
 
-(Uses the source code from https://github.com/tcort/markdown-link-check[markdown-link-check] module)
-
-++++
 <a href="https://asciinema.org/a/TsMPXxqz92aJIeYhUQTsxbpjn?autoplay=1"><img src="https://raw.githubusercontent.com/gaurav-nelson/asciidoc-link-check/master/scr-rec.gif"/></a>
-++++
 
-== Local Installation
+Local Installation
+==================
+
 To install the command line tool, run:
-[source, bash]
-----
-npm install -g asciidoc-link-check
-----
 
-=== Usage
+``` bash
+npm install -g asciidoc-link-check
+```
+
+Usage
+-----
+
 (Optional) Use the `-p` or `--progress` switch to view progress.
 
-==== Check links for a local file
-[source,bash]
-----
+### Check links for a local file
+
+``` bash
 asciidoc-link-check README.adoc --progress
-----
+```
 
-==== Check links for an online file
-[source,bash]
-----
+### Check links for an online file
+
+``` bash
 asciidoc-link-check https://github.com/gaurav-nelson/asciidoc-link-check/blob/master/README.adoc
-----
+```
 
-==== Check links from standard input
-[source,bash]
-----
+### Check links from standard input
+
+``` bash
 cat <filename>.adoc | asciidoc-link-check -p
-----
+```
 
-==== Check links in all asciidoc files in a directory
+### Check links in all asciidoc files in a directory
 
 Check recursively in the current directory:
-[source,bash]
-----
+
+``` bash
 find . -name \*.adoc -exec asciidoc-link-check -p {} \;
-----
+```
 
 Check recursively in the other directories:
-[source,bash]
-----
+
+``` bash
 find <directory> -name \*.adoc -exec asciidoc-link-check -p {} \;
-----
+```
 
-=== Using in your node project
+Using in your node project
+--------------------------
+
 To add the module to your project, run:
-[source, bash]
-----
-npm install --save asciidoc-link-check
-----
 
-== API
+``` bash
+npm install --save asciidoc-link-check
+```
+
+API
+===
+
 Use the following function:
 
-[source, javascript]
-----
+``` javascript
 asciidocLinkCheck(asciidoc, callback)
-----
+```
+
 Accepts a string containing `asciidoc` formatted text and a `callback`, extracts all links and checks if they are alive or dead. Then calls the `callback` with `(err, results)`.
 
-== Examples
-=== JavaScript
-[source,javascript]
-----
+Examples
+========
+
+JavaScript
+----------
+
+``` javascript
 'use strict';
 
 var asciidocLinkCheck = require('asciidoc-link-check');
@@ -82,4 +88,4 @@ asciidocLinkCheck('xref:https://www.google.com[Google]', function (err, results)
         console.log('%s is %s', result.link, result.status);
     });
 });
-----
+```
