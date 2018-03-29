@@ -30,14 +30,14 @@
   },
   "homepage": "https://github.com/gaurav-nelson/asciidoc-link-check#readme",
   "dependencies": {
-    "asciidoc-link-extractor": "^1.0.1",
-    "async": "^2.6.0",
-    "chalk": "^2.3.0",
-    "commander": "^2.14.1",
-    "link-check": "^4.3.3",
-    "lodash": "^4.17.5",
-    "progress": "^2.0.0",
-    "request": "^2.83.0",
-    "uuid": "^3.2.1"
+    "asciidoc-link-extractor": ">=1.0.2",
+    "async": ">=2.6.0",
+    "chalk": ">=2.3.2",
+    "commander": ">=2.15.1",
+    "link-check": ">=4.3.3",
+    "lodash": ">=4.17.5",
+    "progress": ">=2.0.0",
+    "request": ">=2.85.0",
+    "uuid": ">=3.2.1"
   }
 }
