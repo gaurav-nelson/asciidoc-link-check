@@ -57,6 +57,24 @@ To add the module to your project, run:
 npm install --save asciidoc-link-check
 ```
 
+Docker Run
+==================
+1. Clone the repository:
+
+        git clone https://github.com/gaurav-nelson/asciidoc-link-check.git
+
+2. Open the repository directory:
+
+        cd asciidoc-link-check
+
+3. Build a Docker image:
+
+        docker build --tag asciidoc-link-check .
+
+4. Pipe any asciidoc file `test.adoc` to `docker run`:
+
+        docker run --rm -i asciidoc-link-check < test.adoc
+
 API
 ===
 
