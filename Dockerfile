@@ -9,3 +9,4 @@ RUN set -ex; \
     && npm ls
 # Bundle app source
 COPY . /src
+ENTRYPOINT [ "/src/asciidoc-link-check" ]
