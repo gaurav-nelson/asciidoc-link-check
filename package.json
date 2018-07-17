@@ -7,8 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "pretest": "jshint index.js asciidoc-link-check",
-    "test": "mocha -R spec"
+    "pretest": "jshint index.js asciidoc-link-check"
   },
   "repository": {
     "type": "git",
@@ -31,13 +30,16 @@
   "homepage": "https://github.com/gaurav-nelson/asciidoc-link-check#readme",
   "dependencies": {
     "asciidoc-link-extractor": ">=1.0.2",
-    "async": ">=2.6.0",
-    "chalk": ">=2.3.2",
-    "commander": ">=2.15.1",
-    "link-check": ">=4.3.3",
-    "lodash": ">=4.17.5",
+    "async": ">=2.6.1",
+    "chalk": ">=2.4.1",
+    "commander": ">=2.16.0",
+    "link-check": ">=4.4.4",
+    "lodash": ">=4.17.10",
     "progress": ">=2.0.0",
-    "request": ">=2.85.0",
-    "uuid": ">=3.2.1"
+    "request": ">=2.87.0",
+    "uuid": ">=3.3.2"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.5"
   }
 }
