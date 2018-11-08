@@ -9,18 +9,10 @@ var program = require('commander');
 var request = require('request');
 var url = require('url');
 var path = require('path');
-const uuidv4 = require('uuid/v4');
-var thisuuid = uuidv4();
-
-request({
-    uri: "https://www.google-analytics.com/collect",
-    method: "POST",
-    form: {"v": "1", "t": "event", "tid": "UA-106891751-2", "cid": thisuuid, "ec":"linkcheck", "ea":"main" }
-});
 
 var statusLabels = {
-    alive: chalk.green('✓'),
-    dead: chalk.red('✖')
+	alive: chalk.green('✓'),
+	dead: chalk.red('✖')
 };
 
 var error = false;
@@ -28,47 +20,47 @@ var opts = {};
 var filenameOutput = "";
 var stream = process.stdin; // read from stdin unless a filename is given
 program.option('-p, --progress', 'show progress bar').arguments('[filenameOrUrl]').action(function (filenameOrUrl) {
-        filenameOutput = filenameOrUrl;
-        if (/https?:/.test(filenameOrUrl)) {
-            stream = request.get(filenameOrUrl);
-            try { // extract baseUrl from supplied URL
-                var parsed = url.parse(filenameOrUrl);
-                delete parsed.search;
-                delete parsed.hash;
-                if (parsed.pathname.lastIndexOf('/') !== -1) {
-                    parsed.pathname = parsed.pathname.substr(0, parsed.pathname.lastIndexOf('/') + 1);
-                }
-                opts.baseUrl = url.format(parsed);
-            } catch (err) { /* ignore error */ }
-        } else {
-            opts.baseUrl = 'file://' + path.dirname(path.resolve(filenameOrUrl));
-            stream = fs.createReadStream(filenameOrUrl);
-        }
-    })
-    .parse(process.argv);
+		filenameOutput = filenameOrUrl;
+		if (/https?:/.test(filenameOrUrl)) {
+			stream = request.get(filenameOrUrl);
+			try { // extract baseUrl from supplied URL
+				var parsed = url.parse(filenameOrUrl);
+				delete parsed.search;
+				delete parsed.hash;
+				if (parsed.pathname.lastIndexOf('/') !== -1) {
+					parsed.pathname = parsed.pathname.substr(0, parsed.pathname.lastIndexOf('/') + 1);
+				}
+				opts.baseUrl = url.format(parsed);
+			} catch (err) { /* ignore error */ }
+		} else {
+			opts.baseUrl = 'file://' + path.dirname(path.resolve(filenameOrUrl));
+			stream = fs.createReadStream(filenameOrUrl);
+		}
+	})
+	.parse(process.argv);
 
 opts.showProgressBar = (program.progress === true); // force true or undefined to be true or false.
 
 var asciidoc = ''; // collect the asciidoc data, then process it
 stream.on('data', function (chunk) {
-    asciidoc += chunk.toString();
+	asciidoc += chunk.toString();
 }).on('end', function () {
-    console.log(chalk.cyan('\nFILE: ' + filenameOutput))
-    asciidocLinkCheck(asciidoc, opts, function (err, results) {
+	console.log(chalk.cyan('\nFILE: ' + filenameOutput))
+	asciidocLinkCheck(asciidoc, opts, function (err, results) {
 
-        if (results.length === 0) {
-            console.log(chalk.yellow('No hyperlinks found!\n'))
-        }
-        results.forEach(function (result) {
-            if (result.status === 'dead') {
-                error = true;
-                console.log('[%s] %s', statusLabels[result.status], chalk.red(result.link));
-            } else
-                console.log('[%s] %s', statusLabels[result.status], result.link);
-        });
-        if (error) {
-            console.error(chalk.red('ERROR: dead links found!\n'));
-            process.exit(1);
-        }
-    });
+		if (results.length === 0) {
+			console.log(chalk.yellow('No hyperlinks found!\n'))
+		}
+		results.forEach(function (result) {
+			if (result.status === 'dead') {
+				error = true;
+				console.log('[%s] %s', statusLabels[result.status], chalk.red(result.link));
+			} else
+				console.log('[%s] %s', statusLabels[result.status], result.link);
+		});
+		if (error) {
+			console.error(chalk.red('ERROR: dead links found!\n'));
+			process.exit(1);
+		}
+	});
 });
