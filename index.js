@@ -25,6 +25,23 @@ module.exports = function asciidocLinkCheck(asciidoc, opts, callback) {
     }
 
     async.mapLimit(linksCollection, 2, function (link, callback) {
+        if (opts.ignorePatterns) {
+            let shouldIgnore = opts.ignorePatterns.some(function(ignorePattern) {
+                return ignorePattern.pattern instanceof RegExp ? ignorePattern.pattern.test(link) : (new RegExp(ignorePattern.pattern)).test(link) ? true : false;
+            });
+        
+            if (shouldIgnore) {
+                let linkCheckResult = {};
+
+                linkCheckResult.link = link;
+                linkCheckResult.statusCode = 0;
+                linkCheckResult.status = 'ignored';
+                bar.tick();
+                callback(null, linkCheckResult);
+                return;
+            }
+        }
+        
         linkCheck(link, opts, function (err, result) {
             if (opts.showProgressBar) {
                 bar.tick();

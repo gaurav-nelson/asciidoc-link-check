@@ -12,14 +12,20 @@ var path = require('path');
 
 var statusLabels = {
 	alive: chalk.green('✓'),
-	dead: chalk.red('✖')
+	dead: chalk.red('✖'),
+	ignored: chalk.gray('~')
 };
 
 var error = false;
 var opts = {};
 var filenameOutput = "";
 var stream = process.stdin; // read from stdin unless a filename is given
-program.option('-p, --progress', 'show progress bar').arguments('[filenameOrUrl]').action(function (filenameOrUrl) {
+program
+.option('-p, --progress', 'Show progress bar')
+.option('-c, --config [config]', 'Use a JSON config file')
+.option('-q, --quiet', 'Display errors only')
+.arguments('[filenameOrUrl]')
+.action(function (filenameOrUrl) {
 		filenameOutput = filenameOrUrl;
 		if (/https?:/.test(filenameOrUrl)) {
 			stream = request.get(filenameOrUrl);
@@ -37,30 +43,76 @@ program.option('-p, --progress', 'show progress bar').arguments('[filenameOrUrl]
 			stream = fs.createReadStream(filenameOrUrl);
 		}
 	})
-	.parse(process.argv);
+.parse(process.argv);
 
 opts.showProgressBar = (program.progress === true); // force true or undefined to be true or false.
+opts.quiet = (program.quiet === true);
 
 var asciidoc = ''; // collect the asciidoc data, then process it
 stream.on('data', function (chunk) {
 	asciidoc += chunk.toString();
 }).on('end', function () {
 	console.log(chalk.cyan('\nFILE: ' + filenameOutput))
-	asciidocLinkCheck(asciidoc, opts, function (err, results) {
 
-		if (results.length === 0) {
-			console.log(chalk.yellow('No hyperlinks found!\n'))
-		}
-		results.forEach(function (result) {
-			if (result.status === 'dead') {
-				error = true;
-				console.log('[%s] %s', statusLabels[result.status], chalk.red(result.link));
-			} else
-				console.log('[%s] %s', statusLabels[result.status], result.link);
-		});
-		if (error) {
-			console.error(chalk.red('ERROR: dead links found!\n'));
-			process.exit(1);
-		}
-	});
+	if (program.config) {
+        fs.access(program.config, fs.constants.R_OK, function (err) {
+            if (!err) {
+                let configStream = fs.createReadStream(program.config);
+                let configData = '';
+
+                configStream.on('data', function (chunk) {
+                    configData += chunk.toString();
+                }).on('end', function () {
+                    let config = JSON.parse(configData);
+
+                    opts.ignorePatterns = config.ignorePatterns;
+
+                    runasciidocLinkCheck(asciidoc, opts);
+                });
+            }
+            else {
+                console.error(chalk.red('\nERROR: Can\'t access configuration file.'));
+                process.exit(1);
+            }
+        });
+    }
+    else {
+        runasciidocLinkCheck(asciidoc, opts);
+    }
 });
+
+function runasciidocLinkCheck(asciidoc, opts) {
+
+asciidocLinkCheck(asciidoc, opts, function (err, results) {
+
+	if (results.length === 0) {
+		console.log(chalk.yellow('No hyperlinks found!\n'))
+	}
+	results.forEach(function (result) {
+		if (result.status === 'dead') {
+			error = true;
+		}
+
+		// Skip messages for non-deadlinks in quiet mode.
+		if (opts.quiet && result.status !== 'dead') {
+			return;
+		}
+
+		switch(result.status) {
+			case 'dead':
+				console.log('[%s] %s', statusLabels[result.status], chalk.red(result.link));
+			  	break;
+			case 'ignored':
+				console.log('[%s] %s', statusLabels[result.status], chalk.gray(result.link));
+			  	break;
+			default:
+				console.log('[%s] %s', statusLabels[result.status], result.link);
+		} 
+
+	});
+	if (error) {
+		console.error(chalk.red('ERROR: dead links found!\n'));
+		process.exit(1);
+	}
+});
+}
