@@ -48,6 +48,23 @@ Check recursively in the other directories:
 find <directory> -name \*.adoc -exec asciidoc-link-check -p {} \;
 ```
 
+### Ignore specific links
+
+1. Create a JSON config file containing ignore patterns:
+    ```json
+    {
+        "ignorePatterns": [
+            { "pattern": "^https://192.17" },
+            { "pattern": "^https://www.google" }
+        ]
+
+    }
+    ```
+1. Use the config file option:
+    ```
+    asciidoc-link-check README.adoc -c <configfile.json>
+    ```
+
 Using in your node project
 --------------------------
 
@@ -81,10 +98,16 @@ API
 Use the following function:
 
 ``` javascript
-asciidocLinkCheck(asciidoc, callback)
+asciidocLinkCheck(asciidoc, [opts], callback)
 ```
 
-Accepts a string containing `asciidoc` formatted text and a `callback`, extracts all links and checks if they are alive or dead. Then calls the `callback` with `(err, results)`.
+Accepts a string containing `asciidoc` formatted text and a `callback` function,
+extracts all links and checks if they are alive or dead. Then calls the
+`callback` function with `(err, results)`.
+
+- `opts` optional objects
+
+  - `ignorePatterns`: An array of objects of regular expressions patterns.
 
 Examples
 ========
