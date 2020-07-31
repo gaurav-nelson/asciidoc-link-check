@@ -6,7 +6,7 @@ var chalk = require('chalk');
 var fs = require('fs');
 var asciidocLinkCheck = require('./');
 var program = require('commander');
-var request = require('request');
+const axios = require('axios');
 var url = require('url');
 var path = require('path');
 
@@ -28,7 +28,7 @@ program
 .action(function (filenameOrUrl) {
 		filenameOutput = filenameOrUrl;
 		if (/https?:/.test(filenameOrUrl)) {
-			stream = request.get(filenameOrUrl);
+			stream = axios.get(filenameOrUrl);
 			try { // extract baseUrl from supplied URL
 				var parsed = url.parse(filenameOrUrl);
 				delete parsed.search;
