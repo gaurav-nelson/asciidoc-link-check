@@ -12,6 +12,8 @@ description: |
     $ find . -name \*.adoc -exec asciidoc-link-check -p {} \;
   Ignore specific links:
     $ asciidoc-link-check README.adoc -c <configfile.json>
+version: 1.0.13
+grade: stable
 
 base: core18
 confinement: strict
