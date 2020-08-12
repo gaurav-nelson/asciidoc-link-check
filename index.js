@@ -36,7 +36,9 @@ module.exports = function asciidocLinkCheck(asciidoc, opts, callback) {
                 linkCheckResult.link = link;
                 linkCheckResult.statusCode = 0;
                 linkCheckResult.status = 'ignored';
-                bar.tick();
+                if (opts.showProgressBar) {
+                    bar.tick();
+                }
                 callback(null, linkCheckResult);
                 return;
             }
