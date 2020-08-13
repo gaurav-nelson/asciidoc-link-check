@@ -1,5 +1,7 @@
-on: push
 name: Publish to Snapcraft
+
+on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
