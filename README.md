@@ -5,7 +5,14 @@
 Local Installation
 ==================
 
-Install with NodeJS, run:
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/asciidoc-link-check)
+
+
+```bash	
+sudo snap install asciidoc-link-check	
+```	
+
+Or install with `npm` run:
 
 ``` bash
 npm install -g asciidoc-link-check
