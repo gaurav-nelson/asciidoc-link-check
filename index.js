@@ -1,4 +1,7 @@
-'use strict';
+(function () {
+    'use strict';
+    // this function is strict...
+ }());
 
 var _ = require('lodash');
 var async = require('async');
