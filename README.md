@@ -5,14 +5,7 @@
 Local Installation
 ==================
 
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/asciidoc-link-check)
-
-
-```bash	
-sudo snap install asciidoc-link-check	
-```	
-
-Or install with `npm` run:
+Install with `npm` run:
 
 ``` bash
 npm install -g asciidoc-link-check
@@ -72,6 +65,12 @@ find <directory> -name \*.adoc -exec asciidoc-link-check -p {} \;
     asciidoc-link-check README.adoc -c <configfile.json>
     ```
 
+> **NOTE**
+>
+> To see other options that `asciidoc-link-check` supports, see
+> `markdown-link-check`
+> config file format at https://github.com/tcort/markdown-link-check#config-file-format
+
 Using in your node project
 --------------------------
 
@@ -95,9 +94,10 @@ Docker Run
 
         docker build --tag asciidoc-link-check .
 
-4. Pipe any asciidoc file `test.adoc` to `docker run`:
+4. Add current directory with your `test.adoc` file as read only volume to the
+   `docker run` command:
 
-        docker run --rm -i asciidoc-link-check < test.adoc
+        docker run -v ${PWD}:/tmp:ro --rm -i asciidoc-link-check /tmp/test.adoc
 
 API
 ===
