@@ -1,3 +1,16 @@
+<table>
+  <tr>
+    <td>
+      <h3> 🚨 Maintenance notice (November 2023) </h3>
+        <p>This action is now in maintenance only mode.
+        <p>I am working on a new tool similar to this action but one that reduces false positives and includes the most requested features.</p>
+        <p>I am currently working on developing and testing <a href="https://github.com/UmbrellaDocs/linkspector">Linkspector</a>, and I hope to release it soon. In the meantime, I'll support this utility in maintenance-only mode as I want to focus more on <a href="https://github.com/UmbrellaDocs/linkspector">Linkspector</a>. I appreciate your understanding and patience.</p>
+        <p>If you're interested in <a href="https://github.com/UmbrellaDocs/linkspector">Linkspector</a>, follow its progress on its GitHub repository. Thank you for using this action, and I hope you will enjoy <a href="https://github.com/UmbrellaDocs/linkspector">Linkspector</a> when it is ready.</p>
+    </td>
+  </tr>
+</table>
+
+# asciidoc-link-check
 (Based on [markdown-link-check](https://github.com/tcort/markdown-link-check) module)
 
 <a href="https://asciinema.org/a/TsMPXxqz92aJIeYhUQTsxbpjn?autoplay=1"><img src="https://raw.githubusercontent.com/gaurav-nelson/asciidoc-link-check/master/scr-rec.gif"/></a>
