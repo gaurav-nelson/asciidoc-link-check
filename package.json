@@ -1,6 +1,6 @@
 {
 	"name": "asciidoc-link-check",
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"description": "Checks if all hyperlinks in an asciidoc file are alive(or dead).",
 	"bin": {
 		"asciidoc-link-check": "asciidoc-link-check"
@@ -31,11 +31,11 @@
 	"homepage": "https://github.com/gaurav-nelson/asciidoc-link-check#readme",
 	"dependencies": {
 		"asciidoc-link-extractor": ">=1.0.3",
-		"async": ">=3.2.4",
-		"axios": ">=1.4.0",
+		"async": ">=3.2.5",
+		"axios": ">=1.6.8",
 		"chalk": "^4.1.2",
-		"commander": ">=11.0.0",
-		"link-check": ">=5.2.0",
+		"commander": ">=12.0.0",
+		"link-check": ">=5.3.0",
 		"lodash": ">=4.17.21",
 		"progress": "^2.0.3"
 	},
