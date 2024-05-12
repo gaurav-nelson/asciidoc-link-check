@@ -1,11 +1,11 @@
 <table>
   <tr>
     <td>
-      <h3> 🚨 Maintenance notice (November 2023) </h3>
-        <p>This action is now in maintenance only mode.
-        <p>I am working on a new tool similar to this action but one that reduces false positives and includes the most requested features.</p>
-        <p>I am currently working on developing and testing <a href="https://github.com/UmbrellaDocs/linkspector">Linkspector</a>, and I hope to release it soon. In the meantime, I'll support this utility in maintenance-only mode as I want to focus more on <a href="https://github.com/UmbrellaDocs/linkspector">Linkspector</a>. I appreciate your understanding and patience.</p>
-        <p>If you're interested in <a href="https://github.com/UmbrellaDocs/linkspector">Linkspector</a>, follow its progress on its GitHub repository. Thank you for using this action, and I hope you will enjoy <a href="https://github.com/UmbrellaDocs/linkspector">Linkspector</a> when it is ready.</p>
+        <h1> 🚨 Deprecated: Please use Linkspector instead. 🚨</h1>
+          <p>This CLI application is now deprecated and no longer actively maintained.</p>
+          <p>I have developed a new tool called <a href="https://github.com/UmbrellaDocs/linkspector">Linkspector</a>, which offers improved functionality and reduced false positives. I recommend using Linkspector for your needs, which is now the preferred and supported option.</p>
+          <p>Linkspector offers enhanced features and better performance, and I will continue to develop and support it moving forward.</p>
+          <p>I appreciate your understanding, and I hope you enjoy using <a href="https://github.com/UmbrellaDocs/linkspector">Linkspector</a>!</p>
     </td>
   </tr>
 </table>
